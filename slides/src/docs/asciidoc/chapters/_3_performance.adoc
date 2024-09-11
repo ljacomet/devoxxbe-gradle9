@@ -1,0 +1,307 @@
+[background-color="#02303a"]
+== Performance as a feature
+image::gradle/bg-7.png[background, size=cover]
+
+&#x1F680;
+
+[background-color="#02303a"]
+=== Faster compilation
+image::gradle/bg-7.png[background, size=cover]
+
+[.notes]
+****
+Louis
+****
+
+=== What is compilation avoidance?
+image::gradle/bg-7.png[background, size=cover]
+
+image::myapp-recompile-diff.png[]
+
+=== Compilation avoidance in practice
+image::gradle/bg-7.png[background, size=cover]
+
+* Since Gradle 3.4 (Feb 2017)
+* No recompilation between projects if ABI did not change
+* Smaller compilation classpath thanks to `api`/`implementation` separation
+
+=== Can it go faster?
+image::gradle/bg-7.png[background, size=cover]
+
+image::compiler-daemons.png[]
+
+[.small.right.top-margin]
+link:https://blog.gradle.org/our-approach-to-faster-compilation[blog/our-approach-to-faster-compilation]
+
+=== Compiler daemons
+image::gradle/bg-7.png[background, size=cover]
+
+* Reuse the Java compiler process across tasks and builds
+* Active by default since Gradle 8.4
+* Kotlin and Scala have their own support for this
+
+=== What's up with 8.0 vs 8.1?
+image::gradle/bg-7.png[background, size=cover]
+
+image::compiler-daemons.png[]
+
+[.small.right.top-margin]
+link:https://blog.gradle.org/our-approach-to-faster-compilation[blog/our-approach-to-faster-compilation]
+
+[background-color="#02303a"]
+=== Gradle Configuration Cache
+image::gradle/bg-7.png[background, size=cover]
+
+[.notes]
+****
+Paul
+****
+
+=== Gradle Configuration Cache
+image::gradle/bg-7.png[background, size=cover]
+
+* The Configuration Cache is
+[%step]
+** a feature that significantly improves build performance
+** by caching the result of the configuration phase
+** and reusing this for subsequent builds.
+
+=== Gradle Configuration Cache
+image::gradle/bg-7.png[background, size=cover]
+
+* Enable it Today, it is *stable* since Gradle 8.1!
+[%step]
+** `--configuration-cache` on the command line
+** `org.gradle.configuration-cache=true` +
+   in your `gradle.properties`
+
+=== Gradle build anatomy
+image::gradle/bg-7.png[background, size=cover]
+
+image::gradle-build-anatomy.png[]
+
+[.small.right.top-margin]
+*Bars not to scale*
+
+=== Configuration phase
+image::gradle/bg-7.png[background, size=cover]
+
+* Apply plugins
+* Execute build logic
+* Compute task graph
+** Selecting and configuring _requested_ tasks
+** and their _dependencies_
+
+=== Caching build configuration
+image::gradle/bg-7.png[background, size=cover]
+
+image::config-cloud.png[]
+
+[.notes]
+****
+CONFIGURATION INPUTS
+****
+
+=== What is cached?
+
+[%step]
+* Task graph
+* Task inputs
+* All the rest is discarded
+** No `project` state anymore
+
+=== Requirements
+image::gradle/bg-7.png[background, size=cover]
+
+* No live JVM types
+** Classloaders, I/O streams, threads, etc.
+* No Gradle model types
+** Including dependency management types
+
+[.small.right.top-margin]
+link:https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:requirements[docs/configuration-cache-requirements]
+
+=== Example of invalid input
+image::gradle/bg-7.png[background, size=cover]
+
+[source,kotlin]
+----
+abstract class SomeTask : DefaultTask() {
+
+    @get:Input lateinit var sourceSet: SourceSet
+
+    @TaskAction
+    fun action() {
+        val classpathFiles = sourceSet.compileClasspath.files
+        // ...
+    }
+}
+----
+
+needs to become
+
+[source,kotlin]
+----
+abstract class SomeTask : DefaultTask() {
+
+    @get:InputFiles @get:Classpath
+    abstract val classpath: ConfigurableFileCollection
+
+    @TaskAction
+    fun action() {
+        val classpathFiles = classpath.files
+        // ...
+    }
+}
+----
+
+configured with
+
+[source,kotlin]
+----
+classpath.from(sourceSet.compileClasspath)
+----
+
+=== Why does it matter?
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* Configuration time goes down to almost zero
+* Valid configuration cache gives stronger guarantees for task isolation
+* Which allows Gradle tasks to run
+[%step]
+** sooner
+** in parallel
+** including inside a single project
+
+[background-color="#02303a"]
+=== Demo
+image::gradle/bg-7.png[background, size=cover]
+
+=== Can I use it on my build?
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* It depends on your build
+* Most plugins out there are already compatible
+* You can selectively declare incompatible tasks +
+  [.small]#`tasks.some { notCompatibleWithConfigurationCache("because") }`#
+* You may have to refactor custom build-logic
+* This is about applying best practices anyway
+
+[.notes]
+****
+* The amount of required work will heavily depend on the 3rd party plugins you use and the amount of custom build logic you have.
+****
+
+=== Configuration Cache Report
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* Useful to understand CC inputs
+* Built-in
+* image:cc-report-inputs.png[width=80%]
+
+=== Configuration Cache Report
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* Useful to understand CC problems
+* Got much nicer in Gradle 8.7 with filtered exceptions
+* image:cc-report-problems.png[]
+
+=== Space Usage Analysis
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* Useful if your cached state is too big
+* External tool link:https://github.com/gradle/gcc2speedscope[gradle/gcc2speedscope]
+* Helps identify "task state leaks"
+* image:gcc2speedscope.png[width=80%]
+
+=== What performance benefits?
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* It depends on your build
+* It's not only about avoiding the configuration phase
+* All tasks will run in parallel, always
+* Configuration model memory can be freed
+* Small builds will mostly benefit from more parallelism
+* Large builds will also benefit from avoided configuration
+
+=== What performance benefits?
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* For example: Square, on a *large* Android build
+* Early adopters - link:https://developer.squareup.com/blog/5-400-hours-a-year-saving-developers-time-and-sanity-with-gradles/[Blog Post] - December 2022
+* _Saving 5,400 hours a year with Gradle's Configuration Cache_
+* _Recovering an estimated $1.1 million in lost productivity annually_
+
+=== Limitations
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* What about the work of the build engineer?
+* What about dependency upgrades and other build focused engineering tasks?
+
+[.notes]
+****
+* Invalidation
+* No Remote  Cache
+****
+
+
+[background-color="#02303a"]
+=== Isolated Projects
+image::gradle/bg-7.png[background, size=cover]
+
+[.notes]
+****
+Louis
+****
+
+=== Did you say cache miss?
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* On a miss, the configuration phase needs to run
+* But, with no shared mutable state between projects, it could
+[%step]
+** Run in parallel
+*** following the projects hierarchy
+** Be cached incrementally
+*** task sub-graphs cached per project
+
+=== More constraints
+image::gradle/bg-7.png[background, size=cover]
+
+* No _mutable_ cross project access during configuration
+** Example: No `allprojects` or `subprojects` that _mutates_ project configuration
+
+[.notes]
+--
+* Applying a plugin only on the root project
+--
+
+=== Progressive adoption
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* Isolated Projects detects violations
+* aka. configuration-coupling between projects
+* Creating buckets of coupled projects
+* Configuring and caching them in parallel and incrementally
+
+=== Isolated Projects Status
+image::gradle/bg-7.png[background, size=cover]
+
+* Alpha experiment on top of the Configuration Cache
+* Interesting for early adopters
+* Focuses on speeding up the IDE experience first
+
+[.notes]
+****
+* We're really close to have IntelliJ and Gradle ready for early adopters
+****
