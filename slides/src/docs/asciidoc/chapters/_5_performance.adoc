@@ -1,80 +1,35 @@
 [background-color="#02303a"]
-== Performance as a feature
+== Build scalability
 image::gradle/bg-7.png[background, size=cover]
 
 &#x1F680;
 
 [background-color="#02303a"]
-=== Faster compilation
+=== Guiding principles
 image::gradle/bg-7.png[background, size=cover]
 
 [.notes]
 ****
 Alex
-TODO Change to goals/history
 ****
 
-=== What is compilation avoidance?
+[%notitle]
+=== Guiding principles
 image::gradle/bg-7.png[background, size=cover]
 
-image::myapp-recompile-diff.png[]
+> Overhead should be proportional to the impact of the change
 
-=== Compilation avoidance in practice
+=== Prioritization based on use-cases
 image::gradle/bg-7.png[background, size=cover]
 
-* Since Gradle 3.4 (Feb 2017)
-* No recompilation between projects if ABI did not change
-* Smaller compilation classpath thanks to `api`/`implementation` separation
-
-=== Can it go faster?
-image::gradle/bg-7.png[background, size=cover]
-
-image::compiler-daemons.png[]
-
-[.small.right.top-margin]
-link:https://blog.gradle.org/our-approach-to-faster-compilation[blog/our-approach-to-faster-compilation]
-
-=== Compiler daemons
-image::gradle/bg-7.png[background, size=cover]
-
-* Reuse the Java compiler process across tasks and builds
-* Active by default since Gradle 8.4
-* Kotlin and Scala have their own support for this
-
-=== What's up with 8.0 vs 8.1?
-image::gradle/bg-7.png[background, size=cover]
-
-image::compiler-daemons.png[]
-
-[.small.right.top-margin]
-link:https://blog.gradle.org/our-approach-to-faster-compilation[blog/our-approach-to-faster-compilation]
-
-[background-color="#02303a"]
-=== Gradle Configuration Cache
-image::gradle/bg-7.png[background, size=cover]
-
-[.notes]
-****
-Louis
-****
-
-=== Gradle Configuration Cache
-image::gradle/bg-7.png[background, size=cover]
-
-* The Configuration Cache is
 [%step]
-** a feature that significantly improves build performance
-** by caching the result of the configuration phase
-** and reusing this for subsequent builds.
-
-=== Gradle Configuration Cache
-image::gradle/bg-7.png[background, size=cover]
-
-* Enable it Today, it is *stable* since Gradle 8.1!
-[%step]
-** `--configuration-cache` on the command line
-** `org.gradle.configuration-cache=true` +
-   in your `gradle.properties`
+* Inner developer loop
+** Code, Build and Test
+* Outer developer loop
+** Sync
+** Integrate
+*** Stateful CI/CD
+*** Ephemeral CI/CD
 
 === Gradle build anatomy
 image::gradle/bg-7.png[background, size=cover]
@@ -84,43 +39,66 @@ image::gradle-build-anatomy.png[]
 [.small.right.top-margin]
 *Bars not to scale*
 
-=== Configuration phase
+[background-color="#02303a"]
+=== Primary strategies
 image::gradle/bg-7.png[background, size=cover]
 
-* Apply plugins
-* Execute build logic
-* Compute task graph
-** Selecting and configuring _requested_ tasks
-** and their _dependencies_
-
-=== Caching build configuration
+=== Performance focus
 image::gradle/bg-7.png[background, size=cover]
 
-image::config-cloud.png[]
+[%step]
+* Work avoidance
+* Parallelism
 
-[.notes]
-****
-CONFIGURATION INPUTS
-****
+=== Execution work avoidance
+image::gradle/bg-7.png[background, size=cover]
+
+* Up-to-date tasks
+* Output caching
+** Tasks
+** And more
+** Local and remote
+* Incremental tasks
+
+=== Execution work avoidance with Develocity
+image::gradle/bg-7.png[background, size=cover]
+
+* Remote caching of outputs
+* Predictive test selection
+
+=== Execution parallelism
+image::gradle/bg-7.png[background, size=cover]
+
+* Parallel task execution
+* Worker API
+* Parallel test execution
+
+=== Execution parallelism with Develocity
+image::gradle/bg-7.png[background, size=cover]
+
+* Test Distribution
+
+[background-color="#02303a"]
+=== Configuration work avoidance
+image::gradle/bg-7.png[background, size=cover]
+
+=== Gradle Configuration Cache
+image::gradle/bg-7.png[background, size=cover]
+
+* The Configuration Cache is
+[%step]
+** a feature that significantly improves the inner developer loop performance
+** by caching the result of the configuration phase
+** and reusing this for subsequent builds.
 
 === What is cached?
+image::gradle/bg-7.png[background, size=cover]
 
 [%step]
 * Task graph
 * Task inputs
 * All the rest is discarded
 ** No `project` state anymore
-
-=== Requirements
-image::gradle/bg-7.png[background, size=cover]
-
-* No live JVM types
-** Classloaders, I/O streams, threads, etc.
-* No Gradle model types
-** Including dependency management types
-
-[.small.right.top-margin]
-link:https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:requirements[docs/configuration-cache-requirements]
 
 === Example of invalid input
 image::gradle/bg-7.png[background, size=cover]
@@ -134,7 +112,7 @@ abstract class SomeTask : DefaultTask() {
     @TaskAction
     fun action() {
         val classpathFiles = sourceSet.compileClasspath.files
-        // ...
+        // Do something with the files
     }
 }
 ----
@@ -151,7 +129,7 @@ abstract class SomeTask : DefaultTask() {
     @TaskAction
     fun action() {
         val classpathFiles = classpath.files
-        // ...
+        // Do something with the files
     }
 }
 ----
@@ -163,36 +141,40 @@ configured with
 classpath.from(sourceSet.compileClasspath)
 ----
 
-=== Why does it matter?
-image::gradle/bg-7.png[background, size=cover]
-
-[%step]
-* Configuration time goes down to almost zero
-* Valid configuration cache gives stronger guarantees for task isolation
-* Which allows Gradle tasks to run
-[%step]
-** sooner
-** in parallel
-** including inside a single project
-
 [background-color="#02303a"]
 === Demo
 image::gradle/bg-7.png[background, size=cover]
+
+[.notes]
+****
+* sooner
+* intra project parallel
+****
+
+=== Additional benefits
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+* Better parallelism at execution
+** Intra project task parallelism
+* Reduced memory usage on CC hits
+** No configuration state is created
 
 === Can I use it on my build?
 image::gradle/bg-7.png[background, size=cover]
 
 [%step]
 * It depends on your build
-* Most plugins out there are already compatible
+** You may have to refactor custom build-logic
+* Most widely plugins out there are already compatible
 * You can selectively declare incompatible tasks +
-  [.small]#`tasks.some { notCompatibleWithConfigurationCache("because") }`#
-* You may have to refactor custom build-logic
+[.small]#`tasks.some { notCompatibleWithConfigurationCache("because") }`#
+
 * This is about applying best practices anyway
 
 [.notes]
 ****
-* The amount of required work will heavily depend on the 3rd party plugins you use and the amount of custom build logic you have.
+* The amount of required work will directly depend on the 3rd party plugins you use and the amount of custom build logic you have.
 ****
 
 === Configuration Cache Report
