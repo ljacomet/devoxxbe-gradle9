@@ -21,13 +21,14 @@ image::gradle/bg-1.png[background, size=cover]
 [%step]
 * Adopt Kotlin 2.0 language level
 * Enables leveraging Kotlin 2.0 features in build logic (plugins and scripts)
-* K2 compiler for better performance
+* And what about K2 compiler?
 
 === Groovy DSL
 image::gradle/bg-1.png[background, size=cover]
 
 [%step]
 * Adopt Groovy 4.x
+* Language changes might impact build scripts
 
 === General update of dependencies
 image::gradle/bg-1.png[background, size=cover]

@@ -126,7 +126,7 @@ Execution failed for task ':dependencies'.
 ----
 
 [background-color="#02303a"]
-=== Laziness as a solution
+=== Provider API and laziness
 image::gradle/bg-6.png[background, size=cover]
 
 [.notes]
@@ -134,28 +134,23 @@ image::gradle/bg-6.png[background, size=cover]
 Louis
 ****
 
-=== The Gradle task graph
+=== What are the challenges?
 image::gradle/bg-6.png[background, size=cover]
-
-image::task-dag-examples.png[]
 
 === Challenge: Evaluation Ordering
 image::gradle/bg-6.png[background, size=cover]
 
 [%step]
-* Evaluation ordering
+* Build scripts are code
+* Code comes with evaluation ordering
+* How can you express that something is to be configured after a later operation?
 ** `afterEvaluate` does not scale
 ** How "after" do you need to be?
 
-=== Challenge: Execution Ordering
-image::gradle/bg-6.png[background, size=cover]
-
-[%step]
-* Tasks produce files
-** How do you make sure the consumer of that file `dependsOn` the producing task?
-
 === Example
 image::gradle/bg-6.png[background, size=cover]
+
+TODO find a better `afterEvaluate` example
 
 [source,kotlin]
 ----
@@ -174,12 +169,33 @@ subprojects {
 }
 ----
 
+=== Challenge: Execution Ordering
+image::gradle/bg-6.png[background, size=cover]
+
+[%step]
+* Tasks produce files
+* Other tasks consume those files
+* How do you make sure that consumer `dependsOn` the producing task?
+
+=== The Gradle task graph
+image::gradle/bg-6.png[background, size=cover]
+
+image::task-dag-examples.png[]
+
 === Solution
 image::gradle/bg-6.png[background, size=cover]
 
 image::laziness.png[]
 
-=== Provider API: Evaluation Ordering
+=== Provider API
+image::gradle/bg-6.png[background, size=cover]
+
+[%step]
+* Deferred value resolution
+* Automatic task dependency management
+* Improved build performance
+
+=== Provider API: Evaluation [.line-through]#Ordering#
 image::gradle/bg-6.png[background, size=cover]
 
 [%step]
@@ -196,8 +212,8 @@ image::gradle/bg-6.png[background, size=cover]
 
 [%step]
 * Task output properties
-* &nbsp;&nbsp;&nbsp;&nbsp;used as input to another task
-* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;track task dependencies automatically.
+* &nbsp;&nbsp;&nbsp;&nbsp; -> used as input to another task
+* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> track task dependencies automatically.
 
 [%notitle]
 === Task wiring example
@@ -238,6 +254,28 @@ image::gradle/bg-6.png[background, size=cover]
 
 image::provider-api-eager.png[]
 
+=== Kotlin DSL assignment
+image::gradle/bg-6.png[background, size=cover]
+
+[source,kotlin]
+----
+interface Extension {
+    val description: Property<String>
+}
+
+// register "extension" with type Extension
+extension {
+    // Using the set() method call
+    description.set("Hello Property")
+    // Using lazy property assignment
+    description = "Hello Property"
+}
+----
+
+[background-color="#02303a"]
+=== Demo
+image::gradle/bg-6.png[background, size=cover]
+
 === Adoption challenge
 image::gradle/bg-6.png[background, size=cover]
 
@@ -272,28 +310,6 @@ output.get().asFile
 output.map { it.asFile.path }
 ----
 
-=== Kotlin DSL assignment
-image::gradle/bg-6.png[background, size=cover]
-
-[source,kotlin]
-----
-interface Extension {
-    val description: Property<String>
-}
-
-// register "extension" with type Extension
-extension {
-    // Using the set() method call
-    description.set("Hello Property")
-    // Using lazy property assignment
-    description = "Hello Property"
-}
-----
-
-[background-color="#02303a"]
-=== Demo
-image::gradle/bg-6.png[background, size=cover]
-
 === Provider API migration
 image::gradle/bg-6.png[background, size=cover]
 
@@ -302,85 +318,3 @@ image::gradle/bg-6.png[background, size=cover]
 * Supported by automatic conversion for plugins
 * Requires polishing the Provider API itself
 * Does not resolve the adoption by community plugins
-
-[background-color="#02303a"]
-=== Modeling
-image::gradle/bg-6.png[background, size=cover]
-
-[.notes]
-****
-Paul
-****
-
-=== Raising the abstraction
-image::gradle/bg-6.png[background, size=cover]
-
-[%step]
-* Gradle has an amazing execution model
-* But leveraging it requires expertise
-* Common use cases are not always easy to express
-
-=== Adding a test suite
-image::gradle/bg-6.png[background, size=cover]
-
-[source,kotlin]
-----
-sourceSets {
-    create("intTest") {
-        compileClasspath += sourceSets.main.map { it.output }
-        runtimeClasspath += sourceSets.main.map { it.output }
-    }
-}
-
-configurations["intTestImplementation"].extendsFrom(configurations.implementation.get())
-configurations["intTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
-
-dependencies {
-    "intTestImplementation"("junit:junit:4.13")
-}
-----
-
-=== Modern test suite
-image::gradle/bg-6.png[background, size=cover]
-
-[source,kotlin]
-----
-testing {
-    suites {
-        register<JvmTestSuite>("integrationTest") {
-            dependencies {
-                implementation("junit:junit:4.13")
-            }
-        }
-    }
-}
-----
-
-=== Going further with dependency declarations
-image::gradle/bg-6.png[background, size=cover]
-
-* Introduce a `dependencies` block
-[%step]
-** That can be reused in different contexts
-** Where configuration names are the same _but contextual_
-** Matches patterns from other ecosystems like Android or Kotlin
-
-=== Kotlin Multi platform example
-image::gradle/bg-6.png[background, size=cover]
-
-[source,kotlin]
-----
-kotlin {
-    sourceSets {
-        commonMain.dependencies {
-            // kotlinx.coroutines will be available in all source sets
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-        }
-        androidMain.dependencies {}
-        iosMain.dependencies {
-            // SQLDelight will be available only in the iOS source set, but not in Android or common
-            implementation("com.squareup.sqldelight:native-driver:2.0.0")
-        }
-    }
-}
-----
