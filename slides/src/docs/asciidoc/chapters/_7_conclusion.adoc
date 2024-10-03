@@ -5,7 +5,21 @@ image::gradle/bg-4-folks.png[background, size=cover]
 [cols="^.^2,^.^1",frame=none,grid=none,role=who-gradle]
 |===
 a|
-a|image::louis.png[]
+a|image::paul.jpg[]
+
+TODO update picture!
+
+[source,kotlin]
+----
+speaker {
+    name = "Alex Semin"
+    twitter = "@alllexist"
+    mastodon = "???"
+    github = "alllex"
+}
+----
+
+image::louis.png[]
 
 [source,kotlin]
 ----
@@ -17,15 +31,11 @@ speaker {
 }
 ----
 
-image::paul.jpg[]
-
-[source,kotlin]
-----
-speaker {
-    name = "Paul Merlin"
-    mastodon = "@eskatos@mastodon.social"
-    github = "eskatos"
-}
-----
-
 |===
+
+[%notitle]
+=== Survey
+image::survey.png[size=cover]
+
+[.center]
+https://gradle.org/2024-developer-survey
