@@ -20,8 +20,8 @@ include::chapters/_3_general.adoc[]
 
 include::chapters/_4_build-comprehensibility.adoc[]
 
-include::chapters/_3_performance.adoc[]
+include::chapters/_5_performance.adoc[]
 
-include::chapters/_5_peek-future.adoc[]
+include::chapters/_6_peek-future.adoc[]
 
-include::chapters/_6_conclusion.adoc[]
+include::chapters/_7_conclusion.adoc[]
