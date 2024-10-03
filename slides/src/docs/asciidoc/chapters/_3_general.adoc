@@ -1,0 +1,42 @@
+[background-color="#02303a"]
+== Core evolutions
+image::gradle/bg-1.png[background, size=cover]
+
+[.notes]
+****
+Louis
+****
+
+=== Raising the minimum Java version
+image::gradle/bg-1.png[background, size=cover]
+
+[%step]
+* Require Java 17 and above for running Gradle
+* Require Java 8 and above for compiling, tests and executing user code
+** For workers in general
+
+=== Kotlin DSL
+image::gradle/bg-1.png[background, size=cover]
+
+[%step]
+* Adopt Kotlin 2.0 language level
+* Enables leveraging Kotlin 2.0 features in build logic (plugins and scripts)
+* K2 compiler for better performance
+
+=== Groovy DSL
+image::gradle/bg-1.png[background, size=cover]
+
+[%step]
+* Adopt Groovy 4.x
+
+=== General update of dependencies
+image::gradle/bg-1.png[background, size=cover]
+
+* Code quality tools defaults
+* Zinc for Scala compilation
+* And more ...
+
+=== Bug fixes
+image::gradle/bg-1.png[background, size=cover]
+
+Many ...

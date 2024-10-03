@@ -15,7 +15,7 @@ image::gradle/bg-6.png[background, size=cover]
 
 [.notes]
 ****
-Paul
+Alex
 ****
 
 === Assertion error handling

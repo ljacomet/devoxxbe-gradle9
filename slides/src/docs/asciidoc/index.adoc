@@ -8,17 +8,19 @@
 = The road to Gradle 9
 
 [.title.right]
+Alex Semin +
 Louis Jacomet +
-Paul Merlin +
-Devoxx France 2024
+Devoxx Belgium 2024
 
 include::chapters/_1_agenda.adoc[]
 
 include::chapters/_2_who.adoc[]
 
-include::chapters/_3_performance.adoc[]
+include::chapters/_3_general.adoc[]
 
 include::chapters/_4_build-comprehensibility.adoc[]
+
+include::chapters/_3_performance.adoc[]
 
 include::chapters/_5_peek-future.adoc[]
 

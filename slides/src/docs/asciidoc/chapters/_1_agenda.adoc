@@ -29,6 +29,8 @@ image::gradle/bg-10.png[background, size=cover]
 === Agenda
 image::gradle/bg-10.png[background, size=cover]
 
+TODO Update!!
+
 * Performance as a feature
 ** Faster compilation
 ** Configuration cache

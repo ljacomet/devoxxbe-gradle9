@@ -10,7 +10,8 @@ image::gradle/bg-7.png[background, size=cover]
 
 [.notes]
 ****
-Louis
+Alex
+TODO Change to goals/history
 ****
 
 === What is compilation avoidance?
@@ -54,7 +55,7 @@ image::gradle/bg-7.png[background, size=cover]
 
 [.notes]
 ****
-Paul
+Louis
 ****
 
 === Gradle Configuration Cache
@@ -259,7 +260,9 @@ image::gradle/bg-7.png[background, size=cover]
 
 [.notes]
 ****
-Louis
+Alex
+
+TODO Move to future section
 ****
 
 === Did you say cache miss?
