@@ -15,6 +15,12 @@ image::gradle/bg-1.png[background, size=cover]
 * Require Java 8 and above for compiling, tests and executing user code
 ** For workers in general
 
+[.notes]
+****
+* Java 17: performance, memory, ...
+* Plugin authors: Use 17 does not impose on their users
+****
+
 === Kotlin DSL
 image::gradle/bg-1.png[background, size=cover]
 
