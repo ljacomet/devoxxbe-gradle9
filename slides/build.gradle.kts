@@ -11,7 +11,8 @@ plugins {
 
 repositories {
     mavenCentral()
-    jcenter {
+    maven {
+        url = uri("https://repo.gradle.org/artifactory/jcenter-backup/")
         content {
             includeModule("me.champeau.deck2pdf", "deck2pdf")
         }
