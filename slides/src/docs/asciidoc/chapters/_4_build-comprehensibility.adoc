@@ -99,6 +99,8 @@ image::gradle/bg-6.png[background, size=cover]
 === Concrete example - before
 image::gradle/bg-6.png[background, size=cover]
 
+TODO was "For more information" really on the same line as the error?
+
 [source,text,role=wrap]
 ----
 FAILURE: Build failed with an exception.
