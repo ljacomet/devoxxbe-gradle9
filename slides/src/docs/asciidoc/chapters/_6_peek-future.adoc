@@ -15,27 +15,15 @@ image::gradle/bg-4.png[background, size=cover]
 Both
 ****
 
-=== Gradle 9 objectives
+=== Gradle 9 - 🐘 Core updates
 image::gradle/bg-4.png[background, size=cover]
 
 [%step]
-* &#x1F680; Performance
-* &#x1F4A1; Comprehensibility
-* 🐘 Miscellaneous
-
-=== Gradle 9 - &#x1F680; Performance
-image::gradle/bg-4.png[background, size=cover]
-
-[%step]
-* Configuration Cache by default
-[%step]
-** With an opt-out
-** Deprecation warning if not enabled in 8.x
-* Isolated Projects as incubating
-[%step]
-** As an opt-in
-** Ready for early adopters
-** Stable as a stretch goal
+* Java 17 minimum for Gradle daemon, Java 8 for workers
+* Kotlin Language 2.0 support in our Kotlin DSL
+* Groovy 4
+* Tools and libraries updates
+* Many bug fixes and improvements
 
 === Gradle 9 - &#x1F4A1; Comprehensibility
 image::gradle/bg-4.png[background, size=cover]
@@ -46,26 +34,30 @@ image::gradle/bg-4.png[background, size=cover]
 * Provider API Migration
 ** Binary compatible migration for 3rd party plugins
 ** Source-compatible migration for local build logic
+* Problems API
 
-=== Gradle 9 - 🐘 Miscellaneous
+=== Gradle 9 - &#x1F680; Scalability
 image::gradle/bg-4.png[background, size=cover]
 
 [%step]
-* Kotlin Language 2.0 support in our Kotlin DSL
-* Use the K2 compiler and benefit from its performance
-* Problems API
-* Many bug fixes and improvements
+* Configuration Cache recommended
+[%step]
+** Deprecation warning if not enabled in later 9.x
 
-=== Gradle 9.0
+=== Gradle 9.0 timeline
 image::gradle/bg-4.png[background, size=cover]
 
-* Q4 2024 release (tentative)
+* Q1 2025 release (tentative)
 * link:https://github.com/orgs/gradle/projects/31/views/1[gradle-roadmap]
 
 image::roadmap.png[]
 
+[background-color="#02303a"]
+=== Ongoing work
+image::gradle/bg-4.png[background, size=cover]
+
 === Limitations of Configuration Cache
-image::gradle/bg-7.png[background, size=cover]
+image::gradle/bg-4.png[background, size=cover]
 
 [%step]
 * What about the work of the build engineer?
@@ -81,10 +73,10 @@ Alex
 
 [background-color="#02303a"]
 === Isolated Projects
-image::gradle/bg-7.png[background, size=cover]
+image::gradle/bg-4.png[background, size=cover]
 
 === Did you say cache miss?
-image::gradle/bg-7.png[background, size=cover]
+image::gradle/bg-4.png[background, size=cover]
 
 [%step]
 * On a miss, the configuration phase needs to run
@@ -96,7 +88,7 @@ image::gradle/bg-7.png[background, size=cover]
 *** task sub-graphs cached per project
 
 === More constraints
-image::gradle/bg-7.png[background, size=cover]
+image::gradle/bg-4.png[background, size=cover]
 
 * No _mutable_ cross project access during configuration
 ** Example: No `allprojects` or `subprojects` that _mutates_ project configuration
@@ -107,7 +99,7 @@ image::gradle/bg-7.png[background, size=cover]
 --
 
 === Progressive adoption
-image::gradle/bg-7.png[background, size=cover]
+image::gradle/bg-4.png[background, size=cover]
 
 [%step]
 * Isolated Projects detects violations
@@ -116,7 +108,7 @@ image::gradle/bg-7.png[background, size=cover]
 * Configuring and caching them in parallel and incrementally
 
 === Isolated Projects Status
-image::gradle/bg-7.png[background, size=cover]
+image::gradle/bg-4.png[background, size=cover]
 
 * Alpha experiment on top of the Configuration Cache
 * Interesting for early adopters
