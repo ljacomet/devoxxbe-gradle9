@@ -1,4 +1,4 @@
-= Cap sur Gradle 9
+= Road to Gradle 9
 
 Alex Semin <asemin@gradle.com>
 
@@ -22,6 +22,7 @@ For comprehensibility, it is all about making Gradle easier to adopt and use for
 Offering all of the above will require the plugin ecosystem to match the updated Gradle APIs and patterns, including stronger constraints, which are required to continue offering the strongest reliability guarantees.
 
 This session will cover topics like:
+
 * Continued investment in configuration caching,
 * Upcoming isolated projects feature,
 * Higher level modeling of software projects,
