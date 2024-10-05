@@ -5,21 +5,19 @@ image::gradle/bg-4-folks.png[background, size=cover]
 [cols="^.^2,^.^1",frame=none,grid=none,role=who-gradle]
 |===
 a|
-a|image::paul.jpg[]
-
-TODO update picture!
+a|image::presenter-alex.png[]
 
 [source,kotlin]
 ----
 speaker {
     name = "Alex Semin"
     twitter = "@alllexist"
-    mastodon = "???"
+    website = "alllex.me"
     github = "alllex"
 }
 ----
 
-image::louis.png[]
+image::presenter-louis.png[]
 
 [source,kotlin]
 ----
