@@ -26,6 +26,11 @@ image::test-output-no-compare.png[]
 === Assertion error handling: improved
 image::gradle/bg-6.png[background, size=cover]
 
+[.notes]
+****
+Since Gradle 8.5
+****
+
 image::test-output-compare.png[]
 
 === Variant-aware dependency resolution errors
@@ -67,7 +72,9 @@ Execution failed for task ':libs:proto:extractIncludeTestProto'.
 === Specific errors for common issues
 image::gradle/bg-6.png[background, size=cover]
 
-[source,text,role=wrap]
+Gradle version mismatch for a plugin (since Gradle 8.7)
+
+[source,text,role=wrap,subs="quotes"]
 ----
 FAILURE: Build failed with an exception.
 
@@ -77,15 +84,57 @@ A problem occurred configuring root project 'example'.
    > Could not resolve com.example:plugin:1.0.
      Required by:
          project : > com.example.greeting:com.example.greeting.gradle.plugin:1.0
-      > Plugin com.example:plugin:1.0 requires at least Gradle 8.0. This build uses Gradle 7.6.
+      *> Plugin com.example:plugin:1.0 requires at least Gradle 8.0. This build uses Gradle 7.6.*
 
 * Try:
 > Upgrade to at least Gradle 8.0. See the instructions at https://docs.gradle.org/8.7/userguide/upgrading_version_8.html#sub:updating-gradle.
 > Downgrade plugin com.example:plugin:1.0 to an older version compatible with Gradle 7.6.
 ----
 
-[%step]
-* Next in 8.8: JVM version mismatch
+=== Specific errors for common issues
+image::gradle/bg-6.png[background, size=cover]
+
+JVM version mismatch for a dependency (since Gradle 8.8)
+
+[source,text,role=wrap,subs="quotes"]
+----
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring root project 'example'.
+> Could not determine the dependencies of task ':consumer:compileJava'.
+ > Could not resolve all task dependencies for configuration ':consumer:compileClasspath'.
+    > Could not resolve project :producer.
+      Required by:
+          project :consumer
+       *> project :producer requires at least a Java 18 JVM. This build uses a Java 17 JVM.*
+
+* Try:
+> Run this build using a Java 18 JVM (or newer).
+> Change the dependency on 'project :producer' to an earlier version that supports JVM runtime version 17.
+----
+
+=== Specific errors for common issues
+image::gradle/bg-6.png[background, size=cover]
+
+Variant ambiguity due to a single unspecified attribute (since Gradle 8.9)
+
+[source,text,role=wrap,subs="quotes"]
+----
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring root project 'example'.
+> Could not resolve all files for configuration ':consumer'.
+    > Could not resolve com.squareup.okhttp3:okhttp:4.4.0.
+        Required by:
+            project :
+        > The consumer was configured to find attribute 'org.gradle.category' with value 'documentation'. There are several available matching variants of com.squareup.okhttp3:okhttp:4.4.0
+          *The only attribute distinguishing these variants is 'org.gradle.docstype'. Add this attribute to the consumer's configuration to resolve the ambiguity:*
+            - Value: 'javadoc' selects variant: 'javadocElements'
+            - Value: 'sources' selects variant: 'sourcesElements'
+            - Value: 'other' selects variant: 'additionalDocs'
+----
 
 === Better build output
 image::gradle/bg-6.png[background, size=cover]
@@ -98,8 +147,6 @@ image::gradle/bg-6.png[background, size=cover]
 
 === Concrete example - before
 image::gradle/bg-6.png[background, size=cover]
-
-TODO was "For more information" really on the same line as the error?
 
 [source,text,role=wrap]
 ----
