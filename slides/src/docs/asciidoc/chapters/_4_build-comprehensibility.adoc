@@ -157,6 +157,23 @@ A problem occurred configuring root project 'example'.
             - Value: 'other' selects variant: 'additionalDocs'
 ----
 
+=== Specific errors for common issues
+image::gradle/bg-6.png[background, size=cover]
+
+Compilation errors at the end of the build (upcoming in Gradle 8.11)
+
+[source,text,role=wrap]
+----
+* What went wrong:
+Execution failed for task ':project1:compileJava'.
+> Compilation failed; see the compiler output below.
+
+Java compilation error (compilation:java:java-compilation-error)
+  sample-project/src/main/java/Problem.java:6: error: incompatible types: int cannot be converted to String
+          String a = 1;
+                     ^
+----
+
 === Better build output
 image::gradle/bg-6.png[background, size=cover]
 
@@ -385,6 +402,6 @@ image::gradle/bg-6.png[background, size=cover]
 
 [%step]
 * Do a large scale migration of Gradle APIs in Gradle 9.0
-* Supported by automatic conversion for plugins
+* Supported by automatic runtime conversions for plugins
 * Requires polishing the Provider API itself
 * Does not resolve the adoption by community plugins
