@@ -64,6 +64,10 @@ section.has-dark-background {
     text-align: center;
 }
 
+.reveal .slides .imageblock img {
+    border-radius: 4px;
+}
+
 .reveal .slides .center {
     text-align: center;
 }
@@ -76,6 +80,11 @@ section.has-dark-background {
 .reveal pre {
     width: 100%;
     font-size: 0.4em;
+}
+
+.reveal pre code {
+    border-radius: 4px;
+    padding: 8px;
 }
 
 .reveal table.who-gradle {
