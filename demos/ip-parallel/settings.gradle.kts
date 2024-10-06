@@ -10,3 +10,9 @@ rootProject.name = "ip-parallel"
 include("a")
 include("b")
 include("c")
+
+// Example of using Isolated Projects-safe APIs
+
+//gradle.lifecycle.beforeProject {
+//    project.group = "org.example"
+//}
