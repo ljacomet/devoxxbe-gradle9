@@ -5,7 +5,7 @@ plugins {
 develocity.buildScan.termsOfUseUrl = "https://gradle.com/help/legal-terms-of-use"
 develocity.buildScan.termsOfUseAgree = "yes"
 
-rootProject.name = "ip-demo-parallel-config"
+rootProject.name = "ip-parallel"
 
 include("a")
 include("b")
