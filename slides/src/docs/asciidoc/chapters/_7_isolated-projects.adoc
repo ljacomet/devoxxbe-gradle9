@@ -19,10 +19,6 @@ Alex
 * No Remote  Cache
 ****
 
-[background-color="#02303a"]
-=== Isolated Projects
-image::gradle/bg-4.png[background, size=cover]
-
 === Did you say cache miss?
 image::gradle/bg-4.png[background, size=cover]
 
@@ -46,14 +42,15 @@ image::gradle/bg-4.png[background, size=cover]
 * Applying a plugin only on the root project
 --
 
-=== Progressive adoption
-image::gradle/bg-4.png[background, size=cover]
-
-[%step]
-* Isolated Projects detects violations
-* aka. configuration-coupling between projects
-* Creating buckets of coupled projects
-* Configuring and caching them in parallel and incrementally
+// // NOTE: Not designed yet
+// === Progressive adoption
+// image::gradle/bg-4.png[background, size=cover]
+//
+// [%step]
+// * Isolated Projects detects violations
+// * aka. configuration-coupling between projects
+// * Creating buckets of coupled projects
+// * Configuring and caching them in parallel and incrementally
 
 === Isolated Projects Status
 image::gradle/bg-4.png[background, size=cover]
@@ -66,3 +63,63 @@ image::gradle/bg-4.png[background, size=cover]
 ****
 * We're really close to have IntelliJ and Gradle ready for early adopters
 ****
+
+=== Isolated Projects violations
+image::gradle/bg-4.png[background, size=cover]
+
+Any access to mutable state of another project
+
+* `allprojects { group = "..." }`
+* `version = rootProject.version`
+* `dependsOn(project(":b").tasks.findByName("foo"))`
+
+[.notes]
+****
+
+****
+
+=== Isolated Projects-safe APIs
+image::gradle/bg-4.png[background, size=cover]
+
+* `IsolatedProject`
+** `rootProject.isolated.projectDirectory`
+* `GradleLifecycle`
+** `gradle.lifecycle.beforeProject` +
+   `{ group = "..." }`
+
+=== Isolated Projects-safe approaches*
+image::gradle/bg-4.png[background, size=cover]
+
+* Convention plugins
+* Lifecycle callbacks
+* Task-output sharing via configuration dependencies
+
+[.small.right.top-margin]
+*for early adopters
+
+=== Isolated Projects Roadmap
+image::gradle/bg-4.png[background, size=cover]
+
+* Parallel configuration for Sync ✅
+* Parallel configuration for CLI ✅
+* Incremental configuration for Sync 🏗️
+* Incremental configuration for CLI 🔬
+
+=== Isolated Projects Adoption
+image::gradle/bg-4.png[background, size=cover]
+
+* Ecosystem plugins
+** Java ✅
+** Kotlin 🏗️
+** Android 🏗️
+* Other plugins
+** Core validation plugins ✅
+** Other core plugins ⏳
+** Popular community plugins ⏳
+
+[.notes]
+****
+
+****
+
+
