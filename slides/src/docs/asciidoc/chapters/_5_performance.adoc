@@ -191,20 +191,42 @@ image::gradle/bg-7.png[background, size=cover]
 === Configuration Cache Report
 image::gradle/bg-7.png[background, size=cover]
 
-[%step]
-* Useful to understand CC inputs
-* Built-in
-* image:cc-report-inputs.png[width=80%]
+image:cc-report.png[width=90%]
+
+[.notes]
+--
+* Local report created on every invocation when CC is enabled
+** Useful for adoption
+** Lists violations with stack traces
+** Can help determining extra inputs that may reduce CC hit rates
+* Got nice over the recent releases
+** Shows the build and clearly states which tasks were requested
+** Shows the reason why CC miss happened
+--
+
 
 === Configuration Cache Report
 image::gradle/bg-7.png[background, size=cover]
 
-TODO Include latest updates!
+[.medium]
+Ergonomic stacktraces attached to problems
 
-[%step]
-* Useful to understand CC problems
-* Got much nicer in Gradle 8.7 with filtered exceptions
-* image:cc-report-problems.png[]
+image:cc-report-problems.png[]
+
+[.notes]
+--
+* Hinting at the most relevant user code
+* Compact stack traces for problems
+* When copying from the page the visual whitespace is preserved
+--
+
+=== Configuration Cache Report
+image::gradle/bg-7.png[background, size=cover]
+
+[.medium]
+Summary of tasks marked as incompatible
+
+image:cc-report-incompatible-tasks.png[]
 
 === Space Usage Analysis
 image::gradle/bg-7.png[background, size=cover]
