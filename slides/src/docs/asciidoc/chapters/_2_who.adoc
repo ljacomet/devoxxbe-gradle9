@@ -40,7 +40,7 @@ Open-source build tool under https://github.com/gradle/gradle/blob/master/LICENS
 
 * Official build tool for Android
 * Default with Spring Initializr
-* Over 40 million monthly downloads
+* Over 45 million monthly downloads
 
 [%notitle]
 === Develocity

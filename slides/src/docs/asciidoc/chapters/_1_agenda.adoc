@@ -35,14 +35,11 @@ How often do you touch it?
 === Agenda
 image::gradle/bg-10.png[background, size=cover]
 
-TODO Update!!
-
-* Performance as a feature
-** Faster compilation
-** Configuration cache
-** Isolated projects
+* Core evolutions
 * Build comprehensibility
-** Build problems
-** Laziness as a solution
-** Modeling
+** Errors, warnings
+** Provider API and laziness
+* Build scalability
+** Guiding principles
+** Configuration cache
 * A peek into the future
