@@ -94,7 +94,7 @@ image::gradle/bg-4.png[background, size=cover]
 * Lifecycle callbacks
 * Task-output sharing via configuration dependencies
 
-[.small.right.top-margin]
+[.medium.right.top-margin]
 *for early adopters
 
 === Isolated Projects Roadmap
@@ -117,9 +117,29 @@ image::gradle/bg-4.png[background, size=cover]
 ** Other core plugins ⏳
 ** Popular community plugins ⏳
 
+=== Early adoption approach
+
+* Read Isolated Projects overview in the link:https://docs.gradle.org/current/userguide/isolated_projects.html[userguide]
+* Start with the `help` task with +
+  [.medium]`-Dorg.gradle.unsafe.isolated-projects=true`
+** Inspect the violations in the report
+* For Sync, add the line to the `gradle.properties` +
+  [.medium]`org.gradle.unsafe.isolated-projects=true`
+* Report found problems to community plugins you use
+
+[background-color="#02303a"]
+=== Demo
+image::gradle/bg-7.png[background, size=cover]
+
 [.notes]
 ****
-
+* Use `ip-parallel` demo
+* Note on latest versions (Gradle 8.11-milestone, IDEA EAP)
+* Parallel configuration for CLI
+* Parallel configuration for Sync
+* Introduce a violation with allproject-sets-group
+* Show the violation in the report
+* Fix the violation
 ****
 
 
