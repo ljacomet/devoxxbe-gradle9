@@ -64,7 +64,7 @@ Many ...
 image::gradle/bg-1.png[background, size=cover]
 
 * Upgrade to the latest Gradle 8.x
-* Fix all deprecations
+* Fix deprecations
 ** Use link:https://docs.gradle.org/current/userguide/upgrading_version_8.html[Upgrade Guide] for more detail
 * Opt-in into features becoming a default
 * Finally, upgrade to Gradle 9.0
