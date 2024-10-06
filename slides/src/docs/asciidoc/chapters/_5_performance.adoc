@@ -234,8 +234,26 @@ image::gradle/bg-7.png[background, size=cover]
 [%step]
 * Useful if your cached state is too big
 * External tool link:https://github.com/gradle/gcc2speedscope[gradle/gcc2speedscope]
-* Helps identify "task state leaks"
-* image:gcc2speedscope.png[width=80%]
+* Helps identify "task state leaks" +
+  image:gcc2speedscope.png[width=80%]
+
+[.notes]
+--
+* If you adopted CC and looking for ways to optimize
+--
+
+=== What about CC on CI?
+image::gradle/bg-7.png[background, size=cover]
+
+* Not officially supported
+* Absolute paths
+* Need to have build logic and dependencies as well
+
+[.notes]
+--
+* TODO Explain challenges
+--
+
 
 === What performance benefits?
 image::gradle/bg-7.png[background, size=cover]
@@ -258,25 +276,43 @@ image::gradle/bg-7.png[background, size=cover]
 * _Saving 5,400 hours a year with Gradle's Configuration Cache_
 * _Recovering an estimated $1.1 million in lost productivity annually_
 
-=== What about CC on CI?
+=== Recent performance improvements
 image::gradle/bg-7.png[background, size=cover]
 
-TODO Explain challenges
-
-* Not officially supported
-* Absolute paths
-* Need to have build logic and dependencies as well
-
-=== Improved Configuration Cache performance (in progress)
-image::gradle/bg-7.png[background, size=cover]
-
-TODO Rephrase
-
-* Smaller cache entries / Faster load times (delivered in 8.10)
+* Smaller cache entries / Faster load times (`8.10`)
+* Parallel load of cache entries (`8.11`)
+* Parallel store of cache entries (`8.11` opt-in)
 * More efficient storage (in-progress)
-* Parallel store of cache entries (opt-in in 8.11)
-* Parallel load of cache entries (enabled by default in 8.11)
-* Improvements to cache hit rate
-** Cache miss reason in Build Scan™ (delivered in 8.10)
-* Configuration Cache for Android Studio Sync (in progress)
+
+=== Performance gains in 8.10
+image::gradle/bg-7.png[background, size=cover]
+
+[.medium]
+Smaller cache entries / Faster load times
+
+[.medium]
+* On the Gradle build:
+** Miss: -2.75%
+** Hit: -23.46%
+** Storage: -57.4%
+* On a large synthetic Android build (3400+ modules):
+** Miss: -7.67%
+** Hit: -28.09%
+** Storage: -72.6%
+
+[.medium.right.top-margin]
+link:https://docs.gradle.org/8.10.2/release-notes.html[details in release notes]
+
+=== Configuration Cache status
+image::gradle/bg-7.png[background, size=cover]
+
+* Widely adopted by the ecosystem and community
+* Brings direct benefits to developer productivity
+* Keeps getting faster and easier to adopt
+* Unlocks more upcoming performance features
+
+[.notes]
+--
+* There is no reason at this point to not do it
+--
 
