@@ -24,4 +24,8 @@ include::chapters/_5_performance.adoc[]
 
 include::chapters/_6_peek-future.adoc[]
 
-include::chapters/_7_conclusion.adoc[]
+include::chapters/_7_isolated-projects.adoc[]
+
+include::chapters/_8_declarative-gradle.adoc[]
+
+include::chapters/_42_conclusion.adoc[]
