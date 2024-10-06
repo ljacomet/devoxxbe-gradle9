@@ -47,6 +47,8 @@ image::gradle/bg-4.png[background, size=cover]
 === Gradle 9.0 timeline
 image::gradle/bg-4.png[background, size=cover]
 
+TODO Update roadmap screenshot
+
 * Q1 2025 release (tentative)
 * link:https://github.com/orgs/gradle/projects/31/views/1[gradle-roadmap]
 

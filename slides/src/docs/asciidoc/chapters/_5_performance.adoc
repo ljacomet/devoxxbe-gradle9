@@ -83,7 +83,7 @@ image::gradle/bg-7.png[background, size=cover]
 === Execution work avoidance with Develocity
 image::gradle/bg-7.png[background, size=cover]
 
-* Remote caching of outputs
+* Replicated remote caching of outputs
 * Predictive test selection
 
 === Execution parallelism
@@ -208,6 +208,8 @@ image::gradle/bg-7.png[background, size=cover]
 === Configuration Cache Report
 image::gradle/bg-7.png[background, size=cover]
 
+TODO Include latest updates!
+
 [%step]
 * Useful to understand CC problems
 * Got much nicer in Gradle 8.7 with filtered exceptions
@@ -239,5 +241,16 @@ image::gradle/bg-7.png[background, size=cover]
 [%step]
 * For example: Square, on a *large* Android build
 * Early adopters - link:https://developer.squareup.com/blog/5-400-hours-a-year-saving-developers-time-and-sanity-with-gradles/[Blog Post] - December 2022
+* _decreased our local build times from 182 hours to 25 hours per week!_
 * _Saving 5,400 hours a year with Gradle's Configuration Cache_
 * _Recovering an estimated $1.1 million in lost productivity annually_
+
+=== What about CC on CI?
+image::gradle/bg-7.png[background, size=cover]
+
+TODO Explain challenges
+
+* Not officially supported
+* Absolute paths
+* Need to have build logic and dependencies as well
+
