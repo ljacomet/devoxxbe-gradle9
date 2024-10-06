@@ -9,12 +9,15 @@ image::gradle/bg-4.png[background, size=cover]
 Louis
 ****
 
-=== Declarative Gradle
+=== Challenges 🔥
 image::gradle/bg-4.png[background, size=cover]
 
-> The presence of code constructs in the software definition, such as variables, local methods and conditional expressions, makes it hard for software developers to work with the build.
->
-> It also makes refactoring more difficult for the IDE and other tools to implement.
+Gradle's build language characteristics:
+[%step, none]
+* Flexible, extensible, & adaptable to complex requirements 👍
+* Appreciated by advanced users 👍
+* Significant learning curve 👎
+* Projects often look very different from one another 👎
 
 [.notes]
 ****
@@ -25,69 +28,71 @@ image::gradle/bg-4.png[background, size=cover]
 * At the same time, it makes it difficult for the IDEs to offer reliable support for editing build scripts.
 ****
 
-=== Declarative Gradle
+=== Mission statement
+image::gradle/bg-4.png[background, size=cover]
+
+[.center]
+> Gradle Build Tool is an open-source build system
+> that automates the process of building software of
+> any type, size, or complexity in a fast and reliable manner
+
+> What sets Gradle Build Tool apart is its elegant and extensible declarative build language that enables expressing
+> any build in a clear and understandable way.
+
+
+=== How do we do?
+image::gradle/bg-4.png[background, size=cover]
+
+> What sets Gradle Build Tool apart is its *elegant and extensible declarative build language that enables expressing
+> any build in a clear and understandable way*.
+
+Current Gradle is
+
+* Extensible ✅
+* Declarative 🤔
+* Clear and understandable 😕
+
+=== Key principles
 image::gradle/bg-4.png[background, size=cover]
 
 [%step]
-* Clear separation of software definition from build logic
-* Declarative configuration language
-* Raised abstraction
-* First class IDE experience
+* Improved ease of use for regular software developers
+* Sustained flexibility for build engineers and advanced users
+* Excellent IDE integration and toolability for everyone
 
-=== Declarative Gradle
+=== Disclaimers
 image::gradle/bg-4.png[background, size=cover]
 
 [%step]
-* New *experimental* initiative
-* Working group with Google, JetBrains and Gradle.
-* First link:https://blog.gradle.org/declarative-gradle[blog post] in November 2023
-* Early link:https://github.com/gradle/declarative-gradle[prototypes] already available
-* First EAP scheduled mid-2024
+* We are _experimenting_
+* Running those experiments require nightly builds
+* Some IDE integrations are demonstrated outside an IDE
+* Prototypes are changing all the time and are not ready for real projects
 
-=== Peek at current prototype
+=== Experiments
 image::gradle/bg-4.png[background, size=cover]
 
-.A Java library
-[source,kotlin]
-----
-javaLibrary {
-    javaVersion = 21
-    dependencies {
-        implementation("com.google.guava:guava:32.1.3-jre")
-    }
-}
-----
+[%step]
+* Software types
+* Declarative Configuration language with integrated tooling
 
-.A Java application
-[source,kotlin]
-----
-javaApplication {
-    javaVersion = 21
-    mainClass = "com.example.App"
-    dependencies {
-        implementation("com.google.guava:guava:32.1.3-jre")
-    }
-}
-----
-
-Disclaimer::
-This will certainly change
-
-=== Peek at current prototype
+=== Example
 image::gradle/bg-4.png[background, size=cover]
 
 .An Android application
 [source,kotlin]
 ----
-androidApplication {
+// <1>
+
+androidApplication { // <2>
     jdkVersion = 17
     compileSdk = 34
     versionCode = 8
     versionName = "0.1.2"
-    applicationId = "org.gradle.experimental.android.application"
+    applicationId = "org.gradle.experimental.android.application" // <3>
     namespace = "org.gradle.experimental.android.application"
-    dependencies {
-        implementation("com.google.guava:guava:32.1.3-jre")
+    dependencies { // <4>
+        implementation("com.google.guava:guava:32.1.3-jre") // <5>
         implementation(project(":android-util"))
     }
     buildTypes {
@@ -97,57 +102,23 @@ androidApplication {
             }
             minifyEnabled = true
         }
-        debug {
-            applicationIdSuffix = ".debug"
-        }
     }
 }
 ----
+<1> No plugins block
+<2> Type of software this build describes
+<3> Configuring a simple property
+<4> Configuring a block
+<5> Type-safe custom dependencies block
 
-=== Peek at current prototype
-image::gradle/bg-4.png[background, size=cover]
-
-.A Kotlin Multiplatform Library
-[source,kotlin]
-----
-kmpLibrary {
-    dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
-    }
-    targets {
-        jvm {
-            jdkVersion = 14
-            dependencies {
-                api("org.apache.commons:commons-lang3:3.14.0")
-            }
-        }
-        js {
-            environment = "node"
-            dependencies {
-                implementation("com.squareup.sqldelight:runtime:1.5.5")
-            }
-        }
-    }
-}
-----
-
-=== Peek at current prototype
+=== Declarative Gradle - What's next?
 image::gradle/bg-4.png[background, size=cover]
 
 [%step]
-* *Disclaimer:* this will certainly change
-* Prototypes available at link:https://github.com/gradle/declarative-gradle[gradle/declarative-gradle]
-* link:https://github.com/gradle/nowinandroid/tree/main-declarative[Now In Android] fork - `main-declarative` branch
-** You can import it in Android Studio
-** Android Studio Koala canary builds have syntax highlighting for declarative files
-
-=== Declarative Gradle
-image::gradle/bg-4.png[background, size=cover]
-
-[%step]
-* New *experimental* initiative
-* Clear separation of software definition from build logic
-* Declarative configuration language
-* Raised abstraction
-* First class IDE experience
-* First EAP scheduled mid-2024
+* First EAP back in July 2024
+** see https://blog.gradle.org/declarative-gradle-first-eap[blog post]
+* Second EAP in October 2024
+** will allow users to experiment with their own builds
+** Looking for feedback from developers and build engineers
+* Third EAP by the end of the year
+** Exact content to be determined
