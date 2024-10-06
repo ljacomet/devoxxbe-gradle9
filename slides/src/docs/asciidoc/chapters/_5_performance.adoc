@@ -16,15 +16,7 @@ image::gradle/bg-7.png[background, size=cover]
 === Guiding principles
 image::gradle/bg-7.png[background, size=cover]
 
-[.notes]
-****
-Alex
-****
-
-[%notitle]
-=== Guiding principles
-image::gradle/bg-7.png[background, size=cover]
-
+[%step]
 > Overhead should be proportional to the impact of the change
 
 === Prioritization based on use-cases
@@ -243,4 +235,17 @@ TODO Explain challenges
 * Not officially supported
 * Absolute paths
 * Need to have build logic and dependencies as well
+
+=== Improved Configuration Cache performance (in progress)
+image::gradle/bg-7.png[background, size=cover]
+
+TODO Rephrase
+
+* Smaller cache entries / Faster load times (delivered in 8.10)
+* More efficient storage (in-progress)
+* Parallel store of cache entries (opt-in in 8.11)
+* Parallel load of cache entries (enabled by default in 8.11)
+* Improvements to cache hit rate
+** Cache miss reason in Build Scan™ (delivered in 8.10)
+* Configuration Cache for Android Studio Sync (in progress)
 
