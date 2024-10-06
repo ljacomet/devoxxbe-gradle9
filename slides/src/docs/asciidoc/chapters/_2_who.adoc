@@ -95,14 +95,11 @@ Showcases how Netflix, Microsoft, LinkedIn and others do DPE
 === Build Scans
 image::gradle/bg-1.png[background, size=cover]
 
-TODO update build scan screenshot (use one with resource analysis)
+// Permanent record of everything that happens in a build
 
-Permanent record +
-of everything that happens in a build.
+image::buildscan-2024-10.png[width=80%,link=https://ge.gradle.org/s/jxbuuanjyz5ei]
 
-image::buildscan-example.png[]
-
-image:build-scan-link.svg[link=https://scans.gradle.com/s/rcqiowuogd2xu]
+image:build-scan-link.svg[link=https://ge.gradle.org/s/jxbuuanjyz5ei]
 
 [.notes]
 --
