@@ -117,16 +117,6 @@ image::gradle/bg-4.png[background, size=cover]
 ** Other core plugins ⏳
 ** Popular community plugins ⏳
 
-=== Early adoption approach
-
-* Read Isolated Projects overview in the link:https://docs.gradle.org/current/userguide/isolated_projects.html[userguide]
-* Start with the `help` task with +
-  [.medium]`-Dorg.gradle.unsafe.isolated-projects=true`
-** Inspect the violations in the report
-* For Sync, add the line to the `gradle.properties` +
-  [.medium]`org.gradle.unsafe.isolated-projects=true`
-* Report found problems to community plugins you use
-
 [background-color="#02303a"]
 === Demo
 image::gradle/bg-7.png[background, size=cover]
@@ -142,4 +132,12 @@ image::gradle/bg-7.png[background, size=cover]
 * Fix the violation
 ****
 
+=== Early adoption approach
 
+* Read Isolated Projects overview in the link:https://docs.gradle.org/current/userguide/isolated_projects.html[userguide]
+* Start with the `help` task with +
+  [.medium]`-Dorg.gradle.unsafe.isolated-projects=true`
+** Inspect the violations in the report
+* For Sync, add the line to the `gradle.properties` +
+  [.medium]`org.gradle.unsafe.isolated-projects=true`
+* Report found problems to community plugins you use

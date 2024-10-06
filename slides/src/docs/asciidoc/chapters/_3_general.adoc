@@ -78,6 +78,11 @@ image::gradle/bg-1.png[background, size=cover]
 
 Many ...
 
+[.notes]
+****
+Includes fixing bugs that can be considered breaking changes
+****
+
 === Smooth upgrade path
 image::gradle/bg-1.png[background, size=cover]
 

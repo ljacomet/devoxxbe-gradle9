@@ -43,6 +43,7 @@ image::gradle/bg-4.png[background, size=cover]
 * Configuration Cache recommended
 [%step]
 ** Deprecation warning if not enabled in later 9.x
+* Accumulated performance improvements and memory optimizations
 
 === Gradle 9.0 timeline
 image::gradle/bg-4.png[background, size=cover]

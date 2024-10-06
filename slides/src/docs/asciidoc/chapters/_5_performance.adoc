@@ -71,9 +71,9 @@ image::gradle/bg-7.png[background, size=cover]
 === Execution parallelism
 image::gradle/bg-7.png[background, size=cover]
 
+* Parallel test execution
 * Parallel task execution
 * Worker API
-* Parallel test execution
 
 === Execution parallelism with Develocity
 image::gradle/bg-7.png[background, size=cover]
@@ -162,13 +162,13 @@ image::gradle/bg-7.png[background, size=cover]
 * Reduced memory usage on CC hits
 ** No configuration state is created
 
-=== Can I use it on my build?
+=== Can you use it for your build?
 image::gradle/bg-7.png[background, size=cover]
 
 [%step]
 * It depends on your build
 ** You may have to refactor custom build-logic
-* Most widely plugins out there are already compatible
+* Most popular plugins out there are already compatible
 * You can selectively declare incompatible tasks +
 [.small]#`tasks.some { notCompatibleWithConfigurationCache("because") }`#
 
@@ -221,7 +221,7 @@ image::gradle/bg-7.png[background, size=cover]
 image::gradle/bg-7.png[background, size=cover]
 
 [%step]
-* For example: Square, on a *large* Android build
+* For example: Square, on their *large* Android build
 * Early adopters - link:https://developer.squareup.com/blog/5-400-hours-a-year-saving-developers-time-and-sanity-with-gradles/[Blog Post] - December 2022
 * _decreased our local build times from 182 hours to 25 hours per week!_
 * _Saving 5,400 hours a year with Gradle's Configuration Cache_

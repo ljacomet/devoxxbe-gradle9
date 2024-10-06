@@ -91,28 +91,6 @@ Execution failed for task ':libs:proto:extractIncludeTestProto'.
 === Specific errors for common issues
 image::gradle/bg-6.png[background, size=cover]
 
-Gradle version mismatch for a plugin (since Gradle 8.7)
-
-[source,text,role=wrap,subs="quotes"]
-----
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-A problem occurred configuring root project 'example'.
-> Could not resolve all files for configuration ':classpath'.
-   > Could not resolve com.example:plugin:1.0.
-     Required by:
-         project : > com.example.greeting:com.example.greeting.gradle.plugin:1.0
-      *> Plugin com.example:plugin:1.0 requires at least Gradle 8.0. This build uses Gradle 7.6.*
-
-* Try:
-> Upgrade to at least Gradle 8.0. See the instructions at https://docs.gradle.org/8.7/userguide/upgrading_version_8.html#sub:updating-gradle.
-> Downgrade plugin com.example:plugin:1.0 to an older version compatible with Gradle 7.6.
-----
-
-=== Specific errors for common issues
-image::gradle/bg-6.png[background, size=cover]
-
 JVM version mismatch for a dependency (since Gradle 8.8)
 
 [source,text,role=wrap,subs="quotes"]
@@ -131,6 +109,28 @@ A problem occurred configuring root project 'example'.
 * Try:
 > Run this build using a Java 18 JVM (or newer).
 > Change the dependency on 'project :producer' to an earlier version that supports JVM runtime version 17.
+----
+
+=== Specific errors for common issues
+image::gradle/bg-6.png[background, size=cover]
+
+Gradle version mismatch for a plugin (since Gradle 8.7)
+
+[source,text,role=wrap,subs="quotes"]
+----
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring root project 'example'.
+> Could not resolve all files for configuration ':classpath'.
+   > Could not resolve com.example:plugin:1.0.
+     Required by:
+         project : > com.example.greeting:com.example.greeting.gradle.plugin:1.0
+      *> Plugin com.example:plugin:1.0 requires at least Gradle 8.0. This build uses Gradle 7.6.*
+
+* Try:
+> Upgrade to at least Gradle 8.0. See the instructions at https://docs.gradle.org/8.7/userguide/upgrading_version_8.html#sub:updating-gradle.
+> Downgrade plugin com.example:plugin:1.0 to an older version compatible with Gradle 7.6.
 ----
 
 === Specific errors for common issues
@@ -246,7 +246,7 @@ subprojects {
             create<MavenPublication>("mavenJava") {
                 from(components["java"])
                 afterEvaluate {
-                    artifactId = customTask.get().artifactId.get()
+                    artifactId = customTask.flatMap { it.artifactId }.get()
                 }
             }
         }
@@ -300,35 +300,6 @@ image::gradle/bg-6.png[background, size=cover]
 * &nbsp;&nbsp;&nbsp;&nbsp; -> used as input to another task
 * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -> track task dependencies automatically.
 
-[%notitle]
-=== Task wiring example
-image::gradle/bg-6.png[background, size=cover]
-
-[source,kotlin]
-----
-val producer = tasks.register<Producer>("producer")
-val consumer = tasks.register<Consumer>("consumer")
-
-consumer {
-    // Connect the producer task output to the consumer task input
-    // Don't need to add a task dependency to the consumer task.
-    // This is automatically added
-    inputFile = producer.flatMap { it.outputFile }
-}
-
-producer {
-    // Set values for the producer lazily
-    // Don't need to update the consumer.inputFile property.
-    // This is automatically updated as producer.outputFile changes
-    outputFile = layout.buildDirectory.file("file.txt")
-}
-
-// Change the build directory.
-// Don't need to update producer.outputFile and consumer.inputFile.
-// These are automatically updated as the build directory changes
-layout.buildDirectory = layout.projectDirectory.dir("output")
-----
-
 === Provider API - Lazy
 image::gradle/bg-6.png[background, size=cover]
 
@@ -360,6 +331,35 @@ extension {
 [background-color="#02303a"]
 === Demo
 image::gradle/bg-6.png[background, size=cover]
+
+[%notitle]
+=== Task wiring example
+image::gradle/bg-6.png[background, size=cover]
+
+[source,kotlin]
+----
+val producer = tasks.register<Producer>("producer")
+val consumer = tasks.register<Consumer>("consumer")
+
+consumer {
+    // Connect the producer task output to the consumer task input
+    // Don't need to add a task dependency to the consumer task.
+    // This is automatically added
+    inputFile = producer.flatMap { it.outputFile }
+}
+
+producer {
+    // Set values for the producer lazily
+    // Don't need to update the consumer.inputFile property.
+    // This is automatically updated as producer.outputFile changes
+    outputFile = layout.buildDirectory.file("file.txt")
+}
+
+// Change the build directory.
+// Don't need to update producer.outputFile and consumer.inputFile.
+// These are automatically updated as the build directory changes
+layout.buildDirectory = layout.projectDirectory.dir("output")
+----
 
 === Adoption challenge
 image::gradle/bg-6.png[background, size=cover]
