@@ -9,7 +9,7 @@ image::gradle/bg-1.png[background, size=cover]
 * 2023 H2: 8.3 -- 8.5
 * 2024 H1: 8.6 -- 8.9
 * 2024 H2: 8.10 -- 8.12*
-* 2025 H1: 9.0*
+* 2025 H1: 8.13* -- 9.0*
 
 [.small.right.top-margin]
 *current plans
@@ -41,6 +41,12 @@ image::gradle/bg-1.png[background, size=cover]
 * Enables leveraging Kotlin 2.0 features in build logic (plugins and scripts)
 * And what about K2 compiler?
 
+[.notes]
+****
+* K2: benefits on large source sets
+* Gradle compiles buildscripts 1 by 1, limited impact
+****
+
 === Groovy DSL
 image::gradle/bg-1.png[background, size=cover]
 
@@ -51,8 +57,12 @@ image::gradle/bg-1.png[background, size=cover]
 === General update of dependencies
 image::gradle/bg-1.png[background, size=cover]
 
-* Code quality tools defaults
-* Zinc for Scala compilation
+[%step]
+* Internal Gradle dependencies updates
+* Plugins and tools defaults
+[%step]
+** Code quality: Checkstyle, PMD, ...
+** Zinc for Scala compilation
 * And more ...
 
 === Bug fixes
@@ -63,10 +73,12 @@ Many ...
 === Smooth upgrade path
 image::gradle/bg-1.png[background, size=cover]
 
+[%step]
 * Upgrade to the latest Gradle 8.x
 * Fix deprecations
-** Use link:https://docs.gradle.org/current/userguide/upgrading_version_8.html[Upgrade Guide] for more detail
+** Use link:https://docs.gradle.org/current/userguide/upgrading_version_8.html[Upgrade Guide] for more details
 * Opt-in into features becoming a default
+** Configuration cache is a major one
 * Finally, upgrade to Gradle 9.0
 
 [.notes]
