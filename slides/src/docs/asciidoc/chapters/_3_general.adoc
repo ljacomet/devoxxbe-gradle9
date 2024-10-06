@@ -53,6 +53,7 @@ image::gradle/bg-1.png[background, size=cover]
 ****
 * K2: benefits on large source sets
 * Gradle compiles buildscripts 1 by 1, limited impact
+* The impact might be visible for plugins authored in Kotlin
 ****
 
 === Groovy DSL
@@ -71,7 +72,6 @@ image::gradle/bg-1.png[background, size=cover]
 [%step]
 ** Code quality: Checkstyle, PMD, ...
 ** Zinc for Scala compilation
-* And more ...
 
 === Bug fixes
 image::gradle/bg-1.png[background, size=cover]

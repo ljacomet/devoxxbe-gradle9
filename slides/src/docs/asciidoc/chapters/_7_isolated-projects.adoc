@@ -92,7 +92,7 @@ image::gradle/bg-4.png[background, size=cover]
 
 * Convention plugins
 * Lifecycle callbacks
-* Task-output sharing via configuration dependencies
+* Task-output sharing via dependency management
 
 [.medium.right.top-margin]
 *for early adopters
