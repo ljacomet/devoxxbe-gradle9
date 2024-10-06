@@ -96,7 +96,7 @@ Showcases how Netflix, Microsoft, LinkedIn and others do DPE
 image::gradle/bg-1.png[background, size=cover]
 
 [.center]
-Build Scans
+Build Scan™
 
 image::buildscan-2024-10.png[width=80%,link=https://ge.gradle.org/s/jxbuuanjyz5ei]
 
