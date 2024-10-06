@@ -37,7 +37,8 @@ section.has-dark-background {
 	}
 }
 
-.reveal {
+// Show logos in bottom corners, when not in overview mode
+.reveal:not(.overview) {
     background-image: url("../images/logo-devoxx-2024.png"), url("../images/logo-gradle-elephant.svg");
     background-size: 90px, 80px;
     background-repeat: no-repeat, no-repeat;
