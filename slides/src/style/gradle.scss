@@ -177,3 +177,7 @@ div.product-logo-as-title img {
     text-wrap: wrap;
     overflow-wrap: normal;
 }
+
+.reveal a:hover img {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+}
