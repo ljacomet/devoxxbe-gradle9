@@ -2,7 +2,7 @@
 == Core evolutions
 image::gradle/bg-1.png[background, size=cover]
 
-=== Release timeline
+=== Gradle release timeline
 image::gradle/bg-1.png[background, size=cover]
 
 * 2023 H1: 8.0 -- 8.2
@@ -11,13 +11,21 @@ image::gradle/bg-1.png[background, size=cover]
 * 2024 H2: 8.10 -- 8.12*
 * 2025 H1: 8.13* -- 9.0*
 
-[.small.right.top-margin]
+[.medium.right.top-margin]
 *current plans
 
 [.notes]
-****
-Louis
-****
+--
+* Releasing on average 6 minor releases per year with a steady schedule
+* Minor does not mean small, minor means remaining fully backward compatible
+** while shipping new features and improvements
+* Historically, have been releasing majors around every 2 years
+** This is the engine of Gradle evolution: shed old weight, update defaults
+--
+
+[background-color="#02303a"]
+=== What comes with 9.0 evolution?
+image::gradle/bg-1.png[background, size=cover]
 
 === Raising the minimum Java version
 image::gradle/bg-1.png[background, size=cover]
