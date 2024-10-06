@@ -4,23 +4,13 @@ image::gradle/bg-7.png[background, size=cover]
 
 &#x1F680;
 
-=== Build scalability
-image::gradle/bg-6.png[background, size=cover]
+=== Gradle vision: scalability
+image::gradle/bg-7.png[background, size=cover]
 
-Gradle vision
-
-Gradle Build Tool is an open-source build system
-that automates the process of building software of
-any type, size, or complexity in a fast and reliable manner
-
-=== Build scalability
-image::gradle/bg-6.png[background, size=cover]
-
-Gradle vision
-
-Gradle Build Tool is an open-source build system
-that automates the process of building software of
-any type, *size, or complexity in a fast* and reliable *manner*
+[.center]
+> Gradle Build Tool is an open-source build system
+> that automates the process of building software of
+> any type, *size, or complexity in a fast* and reliable *manner*
 
 [background-color="#02303a"]
 === Guiding principles
