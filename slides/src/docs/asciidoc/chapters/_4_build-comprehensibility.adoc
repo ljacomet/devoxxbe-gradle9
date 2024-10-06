@@ -4,6 +4,11 @@ image::gradle/bg-6.png[background, size=cover]
 
 &#x1F4A1;
 
+=== Build complexity
+image::gradle/bg-10.png[background, size=cover]
+
+* Who has a complex build setup?
+
 === Gradle vision
 image::gradle/bg-6.png[background, size=cover]
 

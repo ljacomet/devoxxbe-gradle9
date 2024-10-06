@@ -4,20 +4,7 @@ image::gradle/bg-8.png[background, size=cover]
 
 &#x1F4CB;
 
-=== A few build questions ...
-image::gradle/bg-10.png[background, size=cover]
-
-[%step]
-* Who has a long build?
-[%step]
-** 1 hour and more?
-** 30 minutes and more?
-** 5 minutes and more?
-** less than a minute?
-* Who has a complex build setup?
-* Who is happy to use a build tool?
-
-=== And which build tool?
+=== Build tools?
 image::gradle/bg-10.png[background, size=cover]
 
 [%step]
@@ -25,6 +12,25 @@ image::gradle/bg-10.png[background, size=cover]
 * Who uses Maven?
 * Who uses both?
 * Who uses neither?
+[%step]
+* Who is happy to use a build tool?
+
+=== Build logic
+image::gradle/bg-10.png[background, size=cover]
+
+How often do you touch it?
+
+[%step]
+* Almost every day?
+* Almost every week?
+* Just once a month?
+
+[.notes]
+--
+* Maybe joke about the rest having a perfect setup
+* Maybe joke about the first people needing to chat the last
+** Maybe it's fine to make changes often, maybe changes are made rarely because it's hard
+--
 
 === Agenda
 image::gradle/bg-10.png[background, size=cover]

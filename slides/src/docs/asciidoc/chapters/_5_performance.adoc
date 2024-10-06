@@ -4,6 +4,15 @@ image::gradle/bg-7.png[background, size=cover]
 
 &#x1F680;
 
+=== Who has a long build?
+image::gradle/bg-7.png[background, size=cover]
+
+[%step]
+** 1 hour and more?
+** 30 minutes and more?
+** 5 minutes and more?
+** less than a minute?
+
 === Gradle vision: scalability
 image::gradle/bg-7.png[background, size=cover]
 
