@@ -7,8 +7,6 @@ image::gradle/bg-8.png[background, size=cover]
 === A few build questions ...
 image::gradle/bg-10.png[background, size=cover]
 
-TODO: update the conference icon in bottom left
-
 [%step]
 * Who has a long build?
 [%step]
