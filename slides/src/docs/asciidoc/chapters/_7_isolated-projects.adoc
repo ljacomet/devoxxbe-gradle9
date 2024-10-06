@@ -31,15 +31,151 @@ image::gradle/bg-4.png[background, size=cover]
 ** Be cached incrementally
 *** task sub-graphs cached per project
 
-=== More constraints
+
+=== Isolated Projects constraints
 image::gradle/bg-4.png[background, size=cover]
 
-* No _mutable_ cross project access during configuration
-** Example: No `allprojects` or `subprojects` that _mutates_ project configuration
+1. No _mutable_ cross-project access during configuration
+
+
+=== Constraints violations
+image::gradle/bg-4.png[background, size=cover]
+
+[.medium]
+> Access to mutable state of another project is forbidden
+
+[.medium.top-margin]
+Examples:
+
+[%step.medium]
+* `allprojects { group = "..." }`
+* `version = rootProject.version`
+* `dependsOn(project(":b").tasks.findByName("foo"))`
 
 [.notes]
 --
-* Applying a plugin only on the root project
+* What does it mean in practice?
+--
+
+
+=== Directions of development
+image::gradle/bg-4.png[background, size=cover]
+
+* Performance benefits
+[%step]
+* Compatible APIs and patterns
+* Ecosystem adoption
+
+[.notes]
+--
+* The team's approach is to make incremental progress on all fronts and get feedback
+* Currently, we work with select early adopters
+** There are also enthusiasts
+* Later we'll announce the feature wider and ask for community to try it out
+--
+
+=== Isolated Projects Adoption
+image::gradle/bg-4.png[background, size=cover]
+
+* Ecosystem plugins
+** Java ☑️
+** Kotlin 🏗️
+** Android 🏗️
+* Other plugins
+** Core validation plugins ☑️
+** Other core plugins ⏳
+** Popular community plugins ⏳
+
+
+=== Performance benefits
+image::gradle/bg-4.png[background, size=cover]
+
+* Parallel CC store ☑️
+* Parallel configuration for Sync ☑️
+* Parallel configuration for CLI ☑️
+* Incremental configuration for Sync 🏗️
+* Incremental configuration for CLI
+
+[.notes]
+--
+* Focus is on speeding up the IDE experience first
+--
+
+
+=== Isolated Projects-friendly patterns
+image::gradle/bg-4.png[background, size=cover]
+
+* Convention plugins
+* Task-output sharing via dependency management
+
+[.notes]
+--
+* Problem: root project (or applied plugin) configuring other projects
+* Dependency management is mostly IP-compatible by design
+--
+
+
+=== Isolated Projects-safe APIs
+image::gradle/bg-4.png[background, size=cover]
+
+[.medium]
+* Safe project view -- `IsolatedProject`
+** `rootProject.isolated.projectDirectory`
+* New lifecycle callbacks -- `GradleLifecycle`
+** `gradle.lifecycle.beforeProject { group = "..." }`
+* Project-free dependencies with capabilities -- `requireFeature()`
+** `implementation(project(":other"))` +
+   `{ capabilities { requireFeature("foo") } }`
+
+[.notes]
+--
+* More APIs are coming in the next releases to simplify common use-cases
+--
+
+
+[background-color="#02303a"]
+=== Demo
+image::gradle/bg-7.png[background, size=cover]
+
+[.notes]
+****
+* Use `ip-parallel` demo
+* Note on latest versions (Gradle 8.11-milestone, IDEA EAP)
+* Parallel configuration for CLI
+* Parallel configuration for Sync
+* Introduce a violation with allprojects-sets-group
+* Show the violation in the report
+* Fix the violation
+****
+
+=== Isolated Projects Status
+image::gradle/bg-4.png[background, size=cover]
+
+* Alpha experiment on top of the Configuration Cache
+* Focuses on speeding up the IDE experience first
+* Interesting for early adopters
+
+[.notes]
+--
+* We're really close to have IntelliJ and Gradle ready for early adopters
+--
+
+=== Early adoption approach
+
+* Read Isolated Projects overview in the link:https://docs.gradle.org/current/userguide/isolated_projects.html[userguide]
+* Start with the `help` task with +
+  [.medium]`-Dorg.gradle.unsafe.isolated-projects=true`
+** Inspect the violations in the report
+* For Sync, add the line to the `gradle.properties` +
+  [.medium]`org.gradle.unsafe.isolated-projects=true`
+* Report found problems to community plugins you use
+
+[.notes]
+--
+* Be CC compatible
+* Remember to use the latest Gradle and the latest IDEA
+* Should work for Java-only projects
+* Can still be interesting to gauge the scope for, say, Kotlin projects
 --
 
 // // NOTE: Not designed yet
@@ -52,92 +188,3 @@ image::gradle/bg-4.png[background, size=cover]
 // * Creating buckets of coupled projects
 // * Configuring and caching them in parallel and incrementally
 
-=== Isolated Projects Status
-image::gradle/bg-4.png[background, size=cover]
-
-* Alpha experiment on top of the Configuration Cache
-* Interesting for early adopters
-* Focuses on speeding up the IDE experience first
-
-[.notes]
-****
-* We're really close to have IntelliJ and Gradle ready for early adopters
-****
-
-=== Isolated Projects violations
-image::gradle/bg-4.png[background, size=cover]
-
-Any access to mutable state of another project
-
-* `allprojects { group = "..." }`
-* `version = rootProject.version`
-* `dependsOn(project(":b").tasks.findByName("foo"))`
-
-[.notes]
-****
-
-****
-
-=== Isolated Projects-safe APIs
-image::gradle/bg-4.png[background, size=cover]
-
-* `IsolatedProject`
-** `rootProject.isolated.projectDirectory`
-* `GradleLifecycle`
-** `gradle.lifecycle.beforeProject` +
-   `{ group = "..." }`
-
-=== Isolated Projects-safe approaches*
-image::gradle/bg-4.png[background, size=cover]
-
-* Convention plugins
-* Lifecycle callbacks
-* Task-output sharing via dependency management
-
-[.medium.right.top-margin]
-*for early adopters
-
-=== Isolated Projects Roadmap
-image::gradle/bg-4.png[background, size=cover]
-
-* Parallel configuration for Sync ✅
-* Parallel configuration for CLI ✅
-* Incremental configuration for Sync 🏗️
-* Incremental configuration for CLI 🔬
-
-=== Isolated Projects Adoption
-image::gradle/bg-4.png[background, size=cover]
-
-* Ecosystem plugins
-** Java ✅
-** Kotlin 🏗️
-** Android 🏗️
-* Other plugins
-** Core validation plugins ✅
-** Other core plugins ⏳
-** Popular community plugins ⏳
-
-[background-color="#02303a"]
-=== Demo
-image::gradle/bg-7.png[background, size=cover]
-
-[.notes]
-****
-* Use `ip-parallel` demo
-* Note on latest versions (Gradle 8.11-milestone, IDEA EAP)
-* Parallel configuration for CLI
-* Parallel configuration for Sync
-* Introduce a violation with allproject-sets-group
-* Show the violation in the report
-* Fix the violation
-****
-
-=== Early adoption approach
-
-* Read Isolated Projects overview in the link:https://docs.gradle.org/current/userguide/isolated_projects.html[userguide]
-* Start with the `help` task with +
-  [.medium]`-Dorg.gradle.unsafe.isolated-projects=true`
-** Inspect the violations in the report
-* For Sync, add the line to the `gradle.properties` +
-  [.medium]`org.gradle.unsafe.isolated-projects=true`
-* Report found problems to community plugins you use
