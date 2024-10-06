@@ -96,6 +96,7 @@ Execution failed for task ':libs:proto:extractIncludeTestProto'.
 === Specific errors for common issues
 image::gradle/bg-6.png[background, size=cover]
 
+[.medium]
 JVM version mismatch for a dependency (since Gradle 8.8)
 
 [source,text,role=wrap,subs="quotes"]
@@ -119,6 +120,7 @@ A problem occurred configuring root project 'example'.
 === Specific errors for common issues
 image::gradle/bg-6.png[background, size=cover]
 
+[.medium]
 Gradle version mismatch for a plugin (since Gradle 8.7)
 
 [source,text,role=wrap,subs="quotes"]
@@ -141,6 +143,7 @@ A problem occurred configuring root project 'example'.
 === Specific errors for common issues
 image::gradle/bg-6.png[background, size=cover]
 
+[.medium]
 Variant ambiguity due to a single unspecified attribute (since Gradle 8.9)
 
 [source,text,role=wrap,subs="quotes"]
@@ -163,6 +166,7 @@ A problem occurred configuring root project 'example'.
 === Specific errors for common issues
 image::gradle/bg-6.png[background, size=cover]
 
+[.medium]
 Compilation errors at the end of the build (upcoming in Gradle 8.11)
 
 [source,text,role=wrap]
