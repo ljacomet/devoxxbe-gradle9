@@ -8,10 +8,10 @@ image::gradle/bg-7.png[background, size=cover]
 image::gradle/bg-7.png[background, size=cover]
 
 [%step]
-** 1 hour and more?
-** 30 minutes and more?
-** 5 minutes and more?
-** less than a minute?
+* 1 hour and more?
+* 30 minutes and more?
+* 5 minutes and more?
+* less than a minute?
 
 === Gradle vision: scalability
 image::gradle/bg-7.png[background, size=cover]
@@ -179,7 +179,7 @@ image::gradle/bg-7.png[background, size=cover]
 ** You may have to refactor custom build-logic
 * Most popular plugins out there are already compatible
 * You can selectively declare incompatible tasks +
-[.small]#`tasks.some { notCompatibleWithConfigurationCache("because") }`#
+[.small]`tasks.some { notCompatibleWithConfigurationCache("because") }`
 
 * This is about applying best practices anyway
 
