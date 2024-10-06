@@ -2,6 +2,15 @@
 == Core evolutions
 image::gradle/bg-1.png[background, size=cover]
 
+=== Release timeline
+image::gradle/bg-1.png[background, size=cover]
+
+* 2023 H1: 8.0 -- 8.2
+* 2023 H2: 8.3 -- 8.5
+* 2024 H1: 8.6 -- 8.9
+* 2024 H2: 8.10 -- 8.12*
+* 2025 H1: 9.x*
+
 [.notes]
 ****
 Louis
