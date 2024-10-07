@@ -410,3 +410,15 @@ image::gradle/bg-6.png[background, size=cover]
 * Supported by automatic runtime conversions for plugins
 * Requires polishing the Provider API itself
 * Does not resolve the adoption by community plugins
+
+=== Agenda
+image::gradle/bg-10.png[background, size=cover]
+
+* Core evolutions
+* Build comprehensibility
+** Errors, warnings
+** Provider API and laziness
+* *Build scalability*
+** Guiding principles
+** Configuration cache
+* A peek into the future

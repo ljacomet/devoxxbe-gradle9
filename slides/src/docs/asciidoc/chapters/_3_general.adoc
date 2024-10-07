@@ -99,3 +99,9 @@ image::gradle/bg-1.png[background, size=cover]
 * Deal with one issue at a time
 * Enable features that will become a default (e.g. CC)
 ****
+
+=== Gradle 9 themes
+image::gradle/bg-1.png[background, size=cover]
+
+* Build comprehensibility
+* Build scalability
