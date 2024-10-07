@@ -53,7 +53,7 @@ TODO Update roadmap screenshot
 * Q1 2025 release (tentative)
 * link:https://github.com/orgs/gradle/projects/31/views/1[gradle-roadmap]
 
-image::roadmap.png[]
+image::gradle_roadmap.png[]
 
 [background-color="#02303a"]
 === Ongoing work
