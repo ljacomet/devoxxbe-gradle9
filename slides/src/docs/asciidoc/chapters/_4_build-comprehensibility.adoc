@@ -244,8 +244,6 @@ image::gradle/bg-6.png[background, size=cover]
 === Example
 image::gradle/bg-6.png[background, size=cover]
 
-TODO find a better `afterEvaluate` example
-
 [source,kotlin]
 ----
 val customTask = tasks.register<ComputeArtifactId>("customTask")
