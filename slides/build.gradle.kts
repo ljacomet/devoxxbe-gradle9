@@ -146,7 +146,7 @@ tasks {
 }
 
 gitPublish {
-  repoUri.set("git@github.com:ljacomet/devoxxfr-gradle9.git")
+  repoUri.set("git@github.com:ljacomet/devoxxbe-gradle9.git")
   branch.set("gh-pages")
   contents {
     from(tasks.asciidoctorRevealJs)
