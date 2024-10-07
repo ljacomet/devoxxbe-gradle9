@@ -111,6 +111,11 @@ androidApplication { // <2>
 <4> Configuring a block
 <5> Type-safe custom dependencies block
 
+=== Two way tooling
+image::gradle/bg-4.png[background, size=cover]
+
+video::4P0GmcmkUog[youtube, options="muted"]
+
 === Declarative Gradle - What's next?
 image::gradle/bg-4.png[background, size=cover]
 
