@@ -8,7 +8,7 @@ Slides for https://devoxx.be/talk/?id=17697[Devoxx BE 2024] presentation
 
 == Slides and recording
 
-TODO
+Slides: https://jacomet.dev/devoxxbe-gradle9
 
 == Abstract
 
