@@ -118,7 +118,7 @@ image::gradle/bg-4.png[background, size=cover]
 === Isolated Projects-safe APIs
 image::gradle/bg-4.png[background, size=cover]
 
-[.medium]
+[%step.medium]
 * Safe project view -- `IsolatedProject`
 ** `rootProject.isolated.projectDirectory`
 * New lifecycle callbacks -- `GradleLifecycle`
