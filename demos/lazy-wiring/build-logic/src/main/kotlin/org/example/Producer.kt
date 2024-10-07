@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskAction
 abstract class Producer: DefaultTask() {
 
     @get:OutputFile
-    val outputFile: RegularFileProperty = project.objects.fileProperty()
+    abstract val outputFile: RegularFileProperty
 
     @TaskAction
     fun produce() {

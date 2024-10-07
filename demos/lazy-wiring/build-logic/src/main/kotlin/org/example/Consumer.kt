@@ -7,7 +7,7 @@ import org.gradle.api.tasks.TaskAction
 
 abstract class Consumer: DefaultTask() {
     @get:InputFile
-    val inputFile: RegularFileProperty = project.objects.fileProperty()
+    abstract val inputFile: RegularFileProperty
 
     @TaskAction
     fun consume() {
